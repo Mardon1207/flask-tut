@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 
 
 app = Flask(__name__)
@@ -9,9 +9,20 @@ app = Flask(__name__)
 def base():
     return "base"
 
-@app.route('/about')
-def about_view():
-    return "about"
+@app.route('/api')
+def api_view():
+    args = request.args
+
+    return {"result": int(args['result'])}
+
+@app.route('/api/sum')
+def sum_view():
+    params = request.args
+
+    a = int(params['a'])
+    b = int(params['b'])
+
+    return {'result': a + b}
 
 
 
