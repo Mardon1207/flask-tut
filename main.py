@@ -16,6 +16,7 @@ def sum_view():
         return {'result': a + b}
 
     else:
+        print(request.url)
         return {"error": "method not allowed."}
 
 
