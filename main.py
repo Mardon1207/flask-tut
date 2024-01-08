@@ -4,25 +4,19 @@ from flask import Flask, request
 app = Flask(__name__)
 
 
-@app.route('/')
-@app.route('/home')
-def base():
-    return "base"
-
-@app.route('/api')
-def api_view():
-    args = request.args
-
-    return {"result": int(args['result'])}
-
-@app.route('/api/sum')
+@app.route('/api/sum', methods=["GET", "POST"])
 def sum_view():
-    params = request.args
 
-    a = int(params['a'])
-    b = int(params['b'])
+    if request.method == 'POST':
+        params = request.args
 
-    return {'result': a + b}
+        a = int(params['a'])
+        b = int(params['b'])
+
+        return {'result': a + b}
+
+    else:
+        return {"error": "method not allowed."}
 
 
 
