@@ -5,14 +5,12 @@ import json
 app = Flask(__name__)
 
 
-@app.route('/api/sum', methods=["GET", "POST"])
-def sum_view():
+@app.route('/api/sum/<int:a>/<int:b>', methods=["GET", "POST"])
+def sum_view(a: int, b: int):
 
     if request.method == 'POST':
-        json_data = request.json
-        print(type(json_data))
 
-        return {}
+        return {"result": a + b}
 
     else:
         print(request.url)
