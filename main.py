@@ -1,20 +1,16 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 import json
 
 
 app = Flask(__name__)
 
 
-@app.route('/api/sum/<int:a>/<int:b>', methods=["GET", "POST"])
-def sum_view(a: int, b: int):
+@app.route('/<int:n>')
+def home_view(n: int):
 
-    if request.method == 'POST':
+    nums = list(range(n))
 
-        return {"result": a + b}
-
-    else:
-        print(request.url)
-        return {"error": "method not allowed."}, 404
+    return render_template('index.html', context={"nums": nums, "n": n})
 
 
 
