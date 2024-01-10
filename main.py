@@ -1,4 +1,5 @@
 from flask import Flask, request
+import json
 
 
 app = Flask(__name__)
@@ -8,18 +9,16 @@ app = Flask(__name__)
 def sum_view():
 
     if request.method == 'POST':
-        params = request.args
+        data = json.loads(request.data.decode())
+        print(data)
 
-        a = int(params['a'])
-        b = int(params['b'])
-
-        return {'result': a + b}
+        return {"result": data['a'] + data['b']}
 
     else:
         print(request.url)
-        return {"error": "method not allowed."}
+        return {"error": "method not allowed."}, 404
 
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8000)
+    app.run(debug=True)
