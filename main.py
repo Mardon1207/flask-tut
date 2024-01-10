@@ -9,10 +9,9 @@ app = Flask(__name__)
 def sum_view():
 
     if request.method == 'POST':
-        data = json.loads(request.data.decode())
-        print(data)
+        form = request.form
 
-        return {"result": data['a'] + data['b']}
+        return {"result": int(form['a']) + int(form['b'])}
 
     else:
         print(request.url)
